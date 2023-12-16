@@ -1,70 +1,19 @@
-package main
+package day5
 
 import (
 	"fmt"
 	"log"
 	"math"
-	"os"
 	"strconv"
 	"strings"
+
+	"github.com/agrigoryan/aoc_2023_go/aocutils"
 )
 
-type mappingRule struct {
-	src   int
-	dst   int
-	count int
-}
-
-type mapping struct {
-	srcCode string
-	dstCode string
-	rules   []mappingRule
-}
-
-var mappings = map[string]mapping{}
-
-func (m *mapping) mapValue(src int) int {
-	for _, rule := range m.rules {
-		if src >= rule.src && src < rule.src+rule.count {
-			return rule.dst + src - rule.src
-		}
-	}
-	return src
-}
-
-func doMappings(srcCode string, dstCode string, srcValue int) int {
-	mapping := mappings[srcCode]
-	result := srcValue
-	for mapping.srcCode != dstCode {
-		result = mapping.mapValue(result)
-		dstMapping, ok := mappings[mapping.dstCode]
-		if !ok {
-			break
-		}
-		mapping = dstMapping
-	}
-	return result
-}
-
-func Mapper[T any, R any](transform func(T) R) func([]T) []R {
-	return func(arr []T) []R {
-		transformed := []R{}
-		for _, item := range arr {
-			transformed = append(transformed, transform(item))
-		}
-		return transformed
-	}
-}
-
-func main() {
-	content, err := os.ReadFile("d5p2.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-	input := string(content)
+func d5p2(input string) int {
 	lines := strings.Split(input, "\n")
 
-	toNumbersMapper := Mapper(func(str string) int {
+	toNumbersMapper := aocutils.Mapper(func(str string) int {
 		res, err := strconv.Atoi(str)
 		if err != nil {
 			log.Fatal("failed to map to numbers")
@@ -137,4 +86,5 @@ func main() {
 	}
 
 	fmt.Println(totalMin)
+	return totalMin
 }

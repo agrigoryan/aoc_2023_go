@@ -1,9 +1,8 @@
-package main
+package day9
 
 import (
 	"fmt"
 	"log"
-	"os"
 	"strconv"
 	"strings"
 )
@@ -24,12 +23,7 @@ func findNextElement(arr []int) int {
 	return findNextElement(arr[:len(arr)-1]) + arr[len(arr)-1]
 }
 
-func main() {
-	content, err := os.ReadFile("d9p1.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-	input := string(content)
+func d9p1(input string) int {
 	lines := strings.Split(input, "\n")
 
 	sum := 0
@@ -48,4 +42,5 @@ func main() {
 	}
 
 	fmt.Println(sum)
+	return sum
 }

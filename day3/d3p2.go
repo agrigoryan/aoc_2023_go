@@ -1,20 +1,13 @@
-package main
+package day3
 
 import (
 	"fmt"
-	"log"
-	"os"
 	"strconv"
 	"strings"
 	"unicode"
 )
 
-func main() {
-	content, err := os.ReadFile("d3p2.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-	input := string(content)
+func d3p2(input string) int {
 	lines := strings.Split(input, "\n")
 
 	const empty = '.'
@@ -97,4 +90,5 @@ func main() {
 		}
 	}
 	fmt.Println(sum)
+	return sum
 }

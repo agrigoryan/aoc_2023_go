@@ -1,9 +1,7 @@
-package main
+package day1
 
 import (
 	"fmt"
-	"log"
-	"os"
 	"regexp"
 	"strings"
 )
@@ -63,13 +61,8 @@ func findSumBrutally(lines []string) int {
 	return sum
 }
 
-func main() {
-	content, err := os.ReadFile("d1p2.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-	input := string(content)
-
+func d1p2(input string) int {
 	sum := findSumBrutally(strings.Split(input, "\n"))
 	fmt.Println(sum)
+	return sum
 }

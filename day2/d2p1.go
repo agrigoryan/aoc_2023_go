@@ -1,24 +1,18 @@
-package main
+package day2
 
 import (
 	"fmt"
 	"log"
-	"os"
 	"strconv"
 	"strings"
 )
 
-func main() {
+func d2p1(input string) int {
 	maxBalls := map[string]int{
 		"red":   12,
 		"green": 13,
 		"blue":  14,
 	}
-	content, err := os.ReadFile("d2p1.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-	input := string(content)
 	lines := strings.Split(input, "\n")
 	sum := 0
 	for _, line := range lines {
@@ -52,4 +46,5 @@ func main() {
 		}
 	}
 	fmt.Println(sum)
+	return sum
 }

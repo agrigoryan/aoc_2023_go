@@ -1,24 +1,18 @@
-package main
+package day8
 
 import (
 	"fmt"
-	"log"
-	"os"
 	"strings"
 )
 
 type node struct {
-	name  string
-	left  string
-	right string
+	name       string
+	left       string
+	right      string
+	endingNode bool
 }
 
-func main() {
-	content, err := os.ReadFile("d8p1.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-	input := string(content)
+func d8p1(input string) int {
 	lines := strings.Split(input, "\n")
 
 	directions := []rune(lines[0])
@@ -29,7 +23,7 @@ func main() {
 		name := strings.Split(line, " ")[0]
 		left := line[strings.Index(line, "(")+1 : strings.Index(line, ",")]
 		right := line[strings.Index(line, ", ")+2 : strings.Index(line, ")")]
-		nodesByName[name] = &node{name, left, right}
+		nodesByName[name] = &node{name, left, right, false}
 	}
 
 	steps := 0
@@ -49,4 +43,5 @@ func main() {
 	}
 
 	fmt.Println(steps)
+	return steps
 }

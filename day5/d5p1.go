@@ -1,12 +1,13 @@
-package main
+package day5
 
 import (
 	"fmt"
 	"log"
 	"math"
-	"os"
 	"strconv"
 	"strings"
+
+	"github.com/agrigoryan/aoc_2023_go/aocutils"
 )
 
 type mappingRule struct {
@@ -46,25 +47,10 @@ func doMappings(srcCode string, dstCode string, srcValue int) int {
 	return result
 }
 
-func Mapper[T any, R any](transform func(T) R) func([]T) []R {
-	return func(arr []T) []R {
-		transformed := []R{}
-		for _, item := range arr {
-			transformed = append(transformed, transform(item))
-		}
-		return transformed
-	}
-}
-
-func main() {
-	content, err := os.ReadFile("d5p1.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-	input := string(content)
+func d5p1(input string) int {
 	lines := strings.Split(input, "\n")
 
-	toNumbersMapper := Mapper(func(str string) int {
+	toNumbersMapper := aocutils.Mapper(func(str string) int {
 		res, err := strconv.Atoi(str)
 		if err != nil {
 			log.Fatal("failed to map to numbers")
@@ -118,4 +104,5 @@ func main() {
 	}
 
 	fmt.Println(minLocation)
+	return minLocation
 }

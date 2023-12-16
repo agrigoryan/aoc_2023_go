@@ -1,20 +1,13 @@
-package main
+package day1
 
 import (
-	"fmt"
 	"log"
-	"os"
 	"strconv"
 	"strings"
 	"unicode"
 )
 
-func main() {
-	content, err := os.ReadFile("d1p1.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-	input := string(content)
+func d1p1(input string) int {
 	sum := 0
 	for _, line := range strings.Split(input, "\n") {
 		var d1, d2 rune
@@ -35,5 +28,5 @@ func main() {
 		}
 		sum += num
 	}
-	fmt.Println(sum)
+	return sum
 }

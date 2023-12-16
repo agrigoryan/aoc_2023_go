@@ -1,65 +1,11 @@
-package main
+package day10
 
 import (
 	"fmt"
-	"log"
-	"os"
 	"strings"
 )
 
-var pipeDirections = map[rune]struct {
-	u, r, d, l bool
-}{
-	'-': {
-		u: false,
-		r: true,
-		d: false,
-		l: true,
-	},
-	'|': {
-		u: true,
-		r: false,
-		d: true,
-		l: false,
-	},
-	'7': {
-		u: false,
-		r: false,
-		d: true,
-		l: true,
-	},
-	'L': {
-		u: true,
-		r: true,
-		d: false,
-		l: false,
-	},
-	'J': {
-		u: true,
-		r: false,
-		d: false,
-		l: true,
-	},
-	'F': {
-		u: false,
-		r: true,
-		d: true,
-		l: false,
-	},
-	'S': {
-		u: true,
-		r: true,
-		d: true,
-		l: true,
-	},
-}
-
-func main() {
-	content, err := os.ReadFile("d10p2.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-	input := string(content)
+func d10p2(input string) int {
 	lines := strings.Split(input, "\n")
 
 	type pos struct {
@@ -169,4 +115,5 @@ func main() {
 	}
 
 	fmt.Println(numCellsInside)
+	return numCellsInside
 }

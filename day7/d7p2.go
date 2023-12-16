@@ -1,74 +1,19 @@
-package main
+package day7
 
 import (
 	"fmt"
 	"log"
-	"os"
 	"slices"
 	"strconv"
 	"strings"
 )
 
-const (
-	cA = iota
-	cK
-	cQ
-	cT
-	c9
-	c8
-	c7
-	c6
-	c5
-	c4
-	c3
-	c2
-	cJ
-)
-
-const (
-	rFiveOfAKind = iota
-	rFourOfAKind
-	rFullHouse
-	rTheeOfAKind
-	rTwoPairs
-	rPair
-	rHighCard
-)
-
-var ctoi = map[rune]int{
-	'A': cA,
-	'K': cK,
-	'Q': cQ,
-	'T': cT,
-	'9': c9,
-	'8': c8,
-	'7': c7,
-	'6': c6,
-	'5': c5,
-	'4': c4,
-	'3': c3,
-	'2': c2,
-	'J': cJ,
-}
-
-type hand struct {
-	cards  [5]int
-	bid    int
-	counts [13]int
-	rank   int
-}
-
-func main() {
-	content, err := os.ReadFile("d7p2.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-	input := string(content)
+func d7p2(input string) int {
 	lines := strings.Split(input, "\n")
 	hands := []*hand{}
 
 	for _, line := range lines {
-		var h = parseHand(line)
+		var h = parseHand2(line)
 		hands = append(hands, h)
 	}
 
@@ -86,14 +31,14 @@ func main() {
 
 	sum := 0
 	for i, h := range hands {
-		fmt.Printf("hand : %v\n", h)
 		sum += h.bid * (i + 1)
 	}
 
 	fmt.Println(sum)
+	return sum
 }
 
-func parseHand(str string) *hand {
+func parseHand2(str string) *hand {
 	h := &hand{}
 	numJokers := 0
 	for i, r := range str[:5] {
@@ -110,16 +55,15 @@ func parseHand(str string) *hand {
 		}
 	}
 
-	h.resolveRank()
+	h.resolveRank2()
 	return h
 }
 
-func (h *hand) resolveRank() {
+func (h *hand) resolveRank2() {
 	sortedCounts := make([]int, len(h.counts))
 	copy(sortedCounts, h.counts[:])
 	numJoker := sortedCounts[cJ]
 	if numJoker > 0 {
-		fmt.Println(numJoker)
 		maxCard := 0
 		maxCount := 0
 		for i, c := range sortedCounts {
@@ -131,7 +75,6 @@ func (h *hand) resolveRank() {
 		sortedCounts[maxCard] += numJoker
 		sortedCounts[cJ] = 0
 	}
-	fmt.Println(sortedCounts)
 	slices.SortFunc(sortedCounts, func(a, b int) int { return b - a })
 	switch sortedCounts[0] {
 	case 5:

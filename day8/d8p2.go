@@ -1,18 +1,9 @@
-package main
+package day8
 
 import (
 	"fmt"
-	"log"
-	"os"
 	"strings"
 )
-
-type node struct {
-	name       string
-	left       string
-	right      string
-	endingNode bool
-}
 
 // greatest common divisor (GCD) via Euclidean algorithm
 func gcd(a, b int) int {
@@ -35,12 +26,7 @@ func lcm(a, b int, integers ...int) int {
 	return result
 }
 
-func main() {
-	content, err := os.ReadFile("d8p1.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-	input := string(content)
+func d8p2(input string) int {
 	lines := strings.Split(input, "\n")
 
 	directions := []rune(lines[0])
@@ -82,5 +68,7 @@ func main() {
 		cycleLengths[i] = cycleLength(n)
 	}
 
-	fmt.Println(lcm(cycleLengths[0], cycleLengths[1], cycleLengths[2:]...))
+	res := lcm(cycleLengths[0], cycleLengths[1], cycleLengths[2:]...)
+	fmt.Println(res)
+	return res
 }

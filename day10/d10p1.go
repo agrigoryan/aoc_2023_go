@@ -1,9 +1,7 @@
-package main
+package day10
 
 import (
 	"fmt"
-	"log"
-	"os"
 	"strings"
 )
 
@@ -54,12 +52,7 @@ var pipeDirections = map[rune]struct {
 	},
 }
 
-func main() {
-	content, err := os.ReadFile("d10p1.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-	input := string(content)
+func d10p1(input string) int {
 	lines := strings.Split(input, "\n")
 	fmt.Println(lines)
 
@@ -128,4 +121,5 @@ func main() {
 	}
 
 	fmt.Println(m)
+	return m
 }

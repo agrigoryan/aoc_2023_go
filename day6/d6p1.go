@@ -1,46 +1,20 @@
-package main
+package day6
 
 import (
 	"fmt"
 	"log"
 	"math"
-	"os"
 	"strconv"
 	"strings"
+
+	"github.com/agrigoryan/aoc_2023_go/aocutils"
 )
 
-func Filterer[T any](filter func(T) bool) func([]T) []T {
-	return func(arr []T) []T {
-		filtered := []T{}
-		for _, item := range arr {
-			if filter(item) {
-				filtered = append(filtered, item)
-			}
-		}
-		return filtered
-	}
-}
-
-func Mapper[T any, R any](transform func(T) R) func([]T) []R {
-	return func(arr []T) []R {
-		transformed := []R{}
-		for _, item := range arr {
-			transformed = append(transformed, transform(item))
-		}
-		return transformed
-	}
-}
-
-func main() {
-	content, err := os.ReadFile("d6p1.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-	input := string(content)
+func d6p1(input string) int {
 	lines := strings.Split(input, "\n")
 
-	filterEmpty := Filterer(func(str string) bool { return len(str) > 0 })
-	toNumbersMapper := Mapper(func(str string) int {
+	filterEmpty := aocutils.Filterer(func(str string) bool { return len(str) > 0 })
+	toNumbersMapper := aocutils.Mapper(func(str string) int {
 		res, err := strconv.Atoi(str)
 		if err != nil {
 			log.Fatal("failed to map to numbers")
@@ -59,4 +33,5 @@ func main() {
 		result *= x
 	}
 	fmt.Println(result)
+	return result
 }

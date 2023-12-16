@@ -1,9 +1,8 @@
-package main
+package day7
 
 import (
 	"fmt"
 	"log"
-	"os"
 	"slices"
 	"strconv"
 	"strings"
@@ -58,12 +57,7 @@ type hand struct {
 	rank   int
 }
 
-func main() {
-	content, err := os.ReadFile("d7p1.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-	input := string(content)
+func d7p1(input string) int {
 	lines := strings.Split(input, "\n")
 	hands := []*hand{}
 
@@ -90,6 +84,8 @@ func main() {
 	}
 
 	fmt.Println(sum)
+
+	return sum
 }
 
 func parseHand(str string) *hand {

@@ -1,19 +1,13 @@
-package main
+package day2
 
 import (
 	"fmt"
 	"log"
-	"os"
 	"strconv"
 	"strings"
 )
 
-func main() {
-	content, err := os.ReadFile("d2p2.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-	input := string(content)
+func d2p2(input string) int {
 	lines := strings.Split(input, "\n")
 	sum := 0
 	for _, line := range lines {
@@ -41,4 +35,5 @@ func main() {
 		sum += requiredCubes["red"] * requiredCubes["blue"] * requiredCubes["green"]
 	}
 	fmt.Println(sum)
+	return sum
 }
